@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+// imports  helper
+@import "./1-helper/fonts";
+@import "./1-helper/variable";
+@import "./1-helper/common";
+@import "./1-helper/mixin";
+
+// imports modules
+
+@import "./2-modules/components/Navbar/Navbar";
+@import "./2-modules/components/LandingComponent/Banner";
+@import "./2-modules/components/LandingComponent/services";
+@import "./2-modules/components/LandingComponent/features";
+@import "./2-modules/components/Footer";
+// @import "./2-modules/components/Signup";
+// @import "./2-modules/components/Modal/SignupModal";
+// @import "./2-modules/components/loader/LoaderWithBg";
+// @import "./2-modules/components/VerifyEmail";
+// @import "./2-modules/components/AddressPicker";
+// @import "./2-modules/components/RideList";
+// @import "./2-modules/components/RideDetail";

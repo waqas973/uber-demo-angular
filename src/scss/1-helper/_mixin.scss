@@ -1,0 +1,13 @@
+// font style function
+@mixin font_style(
+  $font_size: 1.063rem,
+  $font_weight: 300,
+  $line_height: normal,
+  $text_transform: lowercase
+) {
+  font-family: $font_family;
+  font-size: $font_size;
+  font-weight: $font_weight;
+  line-height: $line_height;
+  text-transform: $text_transform;
+}

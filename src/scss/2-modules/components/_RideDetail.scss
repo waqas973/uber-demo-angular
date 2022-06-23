@@ -1,0 +1,60 @@
+.ride-detail {
+  background-color: rgb(255, 255, 255);
+  height: 35.0625rem;
+  @media (min-width: 830px) {
+    height: 32.0625rem;
+    left: 5%;
+    position: absolute;
+    top: 13%;
+    width: 25rem;
+    z-index: 999;
+  }
+}
+
+.ride-detail__user-avatar {
+  display: grid;
+  justify-content: center;
+  padding-bottom: 1rem;
+  padding-top: 2rem;
+}
+
+.ride-detail__user-avatar img {
+  width: 5rem;
+  height: 5rem;
+}
+
+.ride-detail__user-info {
+  color: $black;
+  font-weight: 600;
+  text-align: center;
+}
+
+.ride-detail__actions {
+  padding: 2rem;
+}
+
+.ride-detail__btn {
+  background: $black;
+  border: none;
+  color: $white;
+  font-size: 0.9375rem;
+  margin: 0.25rem 0;
+  outline: none;
+  padding: 0.75rem 1rem;
+  width: 100%;
+}
+
+.ride-detail__btn:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.ride-detail__result-label {
+  font-size: 0.9375rem;
+  padding-bottom: 0.5rem;
+}
+
+.ride-detail__result-label span {
+  color: $black;
+  font-weight: 600;
+}

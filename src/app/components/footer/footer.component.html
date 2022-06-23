@@ -1,0 +1,51 @@
+<footer class="footer">
+  <div class="container">
+    <h4>Uber</h4>
+    <a routerLink="/#" class="visit__center"> Visit Help Center </a>
+    <div class="row">
+      <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+        <h6>Company</h6>
+        <ul class="list-unstyled">
+          <li *ngFor="let company of companyMockData">
+            <a routerLink="/#">{{ company.text }}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+        <h6>Products</h6>
+        <ul class="list-unstyled">
+          <li *ngFor="let product of productMockData">
+            <a routerLink="/#">{{ product.text }}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+        <h6>Global citizenship</h6>
+        <ul class="list-unstyled">
+          <li>
+            <a routerLink="/#">Safety</a>
+          </li>
+          <li>
+            <a routerLink="/#">Diversity and Inclusion</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+        <h6>Travel</h6>
+        <ul class="list-unstyled">
+          <li>
+            <a routerLink="/#">Airports</a>
+          </li>
+          <li>
+            <a routerLink="/#">Cities</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- {/* footer copyright */} -->
+    <div class="footer__copyright text-center mt-5 text-white">
+      <p>&copy; {{ year }} Tech Inc.</p>
+    </div>
+  </div>
+</footer>

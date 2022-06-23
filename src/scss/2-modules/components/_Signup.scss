@@ -1,0 +1,56 @@
+.signupFor {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
+
+  h2 {
+    @include font_style(1.4rem, bold, normal, capitalize);
+    margin: 0;
+
+    @media (min-width: 992px) {
+      @include font_style(2.5rem, bold, normal, capitalize);
+    }
+  }
+  .arrow__icon {
+    margin-left: 0.8rem;
+    transition: $transition;
+    font-size: 1.8rem;
+  }
+
+  .wrapper {
+    padding: 0.5rem;
+    box-sizing: border-box;
+    color: $black;
+    cursor: pointer;
+    transition: $transition;
+    border-bottom: 2px solid $black;
+    margin-bottom: 2rem;
+
+    &:hover {
+      border-bottom: 1px solid $grey-500;
+      color: $grey-500;
+    }
+    &:hover .arrow__icon {
+      transform: translateX(0.5rem);
+      color: $grey-500;
+    }
+
+    @media (min-width: 772px) {
+      margin-bottom: 0rem;
+    }
+  }
+
+  //   go back
+  .go__back {
+    width: 70vw;
+    max-width: 35rem;
+    padding: 0.8rem;
+    @include font_style(1rem, bold, normal, capitalize);
+    @media (min-width: 772px) {
+      @include font_style(1.5rem, bold, normal, capitalize);
+    }
+  }
+}

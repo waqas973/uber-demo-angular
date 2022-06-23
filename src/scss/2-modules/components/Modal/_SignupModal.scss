@@ -1,0 +1,38 @@
+.signupModal {
+  h5 {
+    @include font_style(1.5rem, bold, normal, capitalize);
+  }
+  .form-label {
+    @include font_style(1rem, 500, normal, capitalize);
+    color: $black;
+  }
+  .form-control {
+    padding: 0.6rem 0.6rem;
+    border-radius: 0px;
+    box-shadow: none;
+    border: 1px solid $black-light;
+    &:focus {
+      border: 1px solid $black-light;
+    }
+  }
+  .form-select {
+    padding: 0.6rem 0.6rem;
+    box-shadow: none;
+    border: 1px solid $black-light;
+    &:focus {
+      border: 1px solid $black-light;
+    }
+  }
+  .is-invalid {
+    border: 1px solid $red-dark;
+  }
+  .error__clr {
+    color: $red-dark;
+  }
+  .btnn__submit {
+    @include font_style(1rem, 500, normal, capitalize);
+    color: $white;
+    width: 7rem;
+    padding: 0.8rem 0.3rem;
+  }
+}

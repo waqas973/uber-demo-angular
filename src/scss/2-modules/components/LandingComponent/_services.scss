@@ -1,0 +1,31 @@
+.services {
+  margin-top: 5rem;
+
+  h3 {
+    @include font_style(1.7rem, 700, 2rem, capitalize);
+    color: $black-light;
+    letter-spacing: $letterSpacing;
+    margin-bottom: 2rem;
+  }
+  .img__fixed {
+    width: 100%;
+    height: 25rem;
+    object-fit: cover;
+  }
+  h4 {
+    @include font_style(1.2rem, 500, 1.7rem, unset);
+    color: $black;
+    margin-top: 2rem;
+  }
+  p {
+    @include font_style(1rem, 300, 1.7rem, unset);
+    color: $black-light;
+  }
+  a {
+    @include font_style(1rem, 500, 1.7rem, unset);
+    color: $black-light;
+    &:hover {
+      color: $black;
+    }
+  }
+}

@@ -1,0 +1,183 @@
+.address {
+  background-color: rgb(255, 255, 255);
+  height: 35.0625rem;
+
+  @media (min-width: 830px) {
+    height: 32.0625rem;
+    left: 5%;
+    position: absolute;
+    top: 13%;
+    width: 25rem;
+    z-index: 999;
+  }
+}
+
+.address__title {
+  align-items: center;
+  background-color: $black-light;
+  color: $white;
+  display: grid;
+  @include font_style(1rem, normal, 1.4rem, unset);
+  height: 11.875rem;
+}
+
+.address__title-container {
+  padding-left: 0.75rem;
+  position: relative;
+}
+
+.address__title-container p {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.address__title-container p:hover {
+  cursor: pointer;
+}
+
+.address__title-from::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: $white;
+  position: absolute;
+  top: 43%;
+  border-radius: 50%;
+  left: 0%;
+}
+
+.address__title-to {
+  padding-top: 1rem;
+}
+
+.address__title-to::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: white;
+  position: absolute;
+  top: 62%;
+  border-radius: 50%;
+  left: 0%;
+}
+
+.search {
+  padding: 0.75rem;
+}
+
+.search__input {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  padding: 0.875rem 1rem;
+  width: 100%;
+  border-bottom: 2px solid $black-light;
+}
+
+.leaflet-routing-container {
+  display: none;
+}
+
+.pin {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  margin-left: -115px;
+  border-radius: 50% 50% 50% 0;
+  border: 4px solid red;
+  width: 20px;
+  height: 20px;
+  transform: rotate(-45deg);
+}
+
+.pin::after {
+  position: absolute;
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  margin-left: -3px;
+  margin-top: -3px;
+  background-color: red;
+}
+
+.leaflet-default-icon-path {
+  background-image: url(https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png);
+}
+
+.search__result {
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.search__result-item {
+  border-bottom: 1px solid #ccc;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: max-content auto;
+  padding: 0.75rem 0;
+  padding-left: 0.5rem;
+}
+
+.search__result-item:hover {
+  cursor: pointer;
+  background: #f3f4f6;
+}
+
+.search__result-icon {
+  align-items: center;
+  background: #ccc;
+  border-radius: 50%;
+  display: grid;
+  height: 1.5rem;
+  justify-content: center;
+  width: 1.5rem;
+}
+
+.search__result-icon svg {
+  fill: #fff;
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+.vehicle__result {
+  height: 15rem;
+  overflow-y: auto;
+}
+.single__vehicle {
+  display: flex;
+  align-items: center;
+  padding: 0.7rem 0.3rem;
+  &:hover {
+    background-color: whitesmoke;
+  }
+  img {
+    width: 3rem;
+    height: 3rem;
+    object-fit: cover;
+  }
+  .vehicle__title {
+    @include font_style(1.1rem, 500, 1.4rem, capitalize);
+    color: $black-light;
+    margin: 0;
+  }
+  p {
+    @include font_style(1.3rem, 500, 1.4rem, capitalize);
+    margin: 0;
+  }
+  .desc {
+    @include font_style(0.8rem, 300, 1.4rem, capitalize);
+    margin: 0;
+    color: $black-light;
+  }
+  button {
+    @include font_style(0.7rem, 500, 1.4rem, capitalize);
+    margin-left: auto;
+    display: block;
+    margin-top: 0.6rem;
+    padding: 0.2rem 0.5rem;
+  }
+}

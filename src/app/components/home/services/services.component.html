@@ -1,0 +1,20 @@
+<section class="services">
+  <div class="container">
+    <h3>Focused on safety, wherever you go</h3>
+    <div class="row">
+      <div
+        class="col-lg-6 mb-5 mb-lg-0"
+        *ngFor="let service of mockServicesData"
+      >
+        <img
+          [src]="service.image"
+          [alt]="service.title"
+          class="img-fluid img__fixed"
+        />
+        <h4>{{ service.title }}</h4>
+        <p>{{ service.text }}</p>
+        <a>{{ service.link }}</a>
+      </div>
+    </div>
+  </div>
+</section>

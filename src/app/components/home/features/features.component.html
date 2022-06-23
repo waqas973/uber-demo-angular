@@ -1,0 +1,17 @@
+<section class="features">
+  <div class="container">
+    <div class="row">
+      <div
+        class="col-lg-4 col-md-6 mb-lg-0 mb-5"
+        *ngFor="let feature of featuresMockData"
+      >
+        <div class="shadow-lg p-4">
+          <fa-icon [icon]="feature.icon" class="icon"></fa-icon>
+          <h4>{{ feature.title }}</h4>
+          <p>{{ feature.text }}</p>
+          <a routerLink="/#">{{ feature.link }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

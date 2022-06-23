@@ -1,0 +1,49 @@
+.verify-email {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .card {
+    border: none;
+    border-radius: 0px;
+    padding: 0px;
+    @media (min-width: 420px) {
+      padding: 2rem;
+    }
+  }
+
+  .card-title {
+    @include font_style(1.2rem, 400, 2rem, unset);
+    background-color: whitesmoke;
+    padding: 1rem;
+  }
+  form {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .form-label {
+    @include font_style(1rem, 500, normal, capitalize);
+    color: $black;
+  }
+  .form-control {
+    padding: 0.6rem 0.6rem;
+    border-radius: 0px;
+    box-shadow: none;
+    border: 1px solid $black-light;
+    &:focus {
+      border: 1px solid $black-light;
+    }
+
+    &.is-invalid {
+      border: 1px solid $red-dark;
+    }
+  }
+  .btnn__submit {
+    @include font_style(1rem, 500, normal, capitalize);
+    color: $white;
+    width: 7rem;
+    padding: 0.8rem 0.3rem;
+  }
+}

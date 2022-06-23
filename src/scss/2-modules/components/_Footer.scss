@@ -1,0 +1,35 @@
+.footer {
+  background-color: $black;
+  margin-top: 5rem;
+  padding: 3rem 1rem;
+
+  @media screen and (min-width: 572px) {
+    padding: 3rem 0rem;
+  }
+
+  h4 {
+    @include font_style(1.5rem, 300, normal, capitalize);
+    color: $white;
+    margin-bottom: 1rem;
+  }
+  h6 {
+    @include font_style(1.3rem, 500, normal, unset);
+    color: $white;
+    margin-bottom: 1rem;
+  }
+  li {
+    margin-bottom: 1rem;
+  }
+  a {
+    @include font_style(0.89rem, 300, normal, unset);
+    color: whitesmoke;
+    text-decoration: none;
+    &:hover {
+      color: $grey-300;
+    }
+  }
+  .visit__center {
+    display: block;
+    margin-bottom: 4rem;
+  }
+}

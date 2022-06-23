@@ -1,0 +1,104 @@
+.ride-list {
+  background-color: rgb(255, 255, 255);
+  height: 35.0625rem;
+
+  @media (min-width: 830px) {
+    height: 32.0625rem;
+    left: 5%;
+    position: absolute;
+    top: 13%;
+    width: 25rem;
+    z-index: 999;
+  }
+}
+
+.ride-list__container {
+  border-bottom: 1px solid #ccc;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.ride-list__title {
+  @include font_style(1.25rem, 600, 1.4rem, unset);
+
+  padding: 1.25rem 0 1.25rem 1.25rem;
+}
+
+.search__result {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.ride-list__content {
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.ride-list__result-item {
+  border-bottom: 1px solid #ccc;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: max-content auto;
+  padding: 0.75rem 0;
+  padding-left: 0.5rem;
+}
+
+.ride-list__result-item:hover {
+  cursor: pointer;
+  background: #f3f4f6;
+}
+
+.ride-list__result-icon {
+  align-items: center;
+  background: #ccc;
+  border-radius: 50%;
+  display: grid;
+  height: 1.5rem;
+  justify-content: center;
+  width: 1.5rem;
+}
+
+.ride-list__result-icon svg {
+  fill: $white;
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+.ride-list__result-label {
+  font-size: 0.9375rem;
+  padding-bottom: 0.5rem;
+}
+
+.ride-list__result-label span {
+  color: $black;
+  font-weight: 600;
+}
+
+.ride-list__accept-btn {
+  background: $black;
+  border: none;
+  color: $white;
+  font-size: 0.9375rem;
+  outline: none;
+  padding: 0.5rem 1rem;
+}
+
+.ride-list__accept-btn:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.empty-message {
+  padding: 0.75rem;
+}
+.ride-message {
+  padding: 1rem 0.75rem;
+  @include font_style(1.1rem, 300, 1.4rem, unset);
+  color: $black-light;
+  letter-spacing: normal;
+}
+.btnn__cancel {
+  @include font_style(1.1rem, 300, 1.4rem, capitalize);
+  padding: 0.5rem;
+  display: block;
+}

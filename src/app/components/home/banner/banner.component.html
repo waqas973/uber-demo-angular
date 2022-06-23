@@ -1,0 +1,98 @@
+<header class="hero hero__top">
+  <div class="hero-container">
+    <div class="card-wrapper">
+      <div class="card">
+        <div
+          class="card-header d-flex justify-content-between align-items-center text-center"
+        >
+          <div
+            style="cursor: pointer"
+            class="px-2"
+            (click)="handleActiveMenu()"
+            [ngClass]="{ isActive: activeMenu === 0 }"
+          >
+            <fa-icon [icon]="faSignal" class="icon"></fa-icon>
+            <p>Drive</p>
+          </div>
+          <div
+            style="cursor: pointer"
+            class="px-2"
+            (click)="handleActiveMenu()"
+            [ngClass]="{ isActive: activeMenu === 1 }"
+          >
+            <fa-icon [icon]="faCar" class="icon"></fa-icon>
+            <p>Ride</p>
+          </div>
+        </div>
+
+        <!-- {/* card body  */} -->
+        <div class="card-body">
+          <div class="driver__container" *ngIf="activeMenu === 0">
+            <h2>Get in the driver’s seat and get paid</h2>
+            <p class="my-4">
+              Drive on the platform with the largest network of active riders.
+            </p>
+            <button class="btnn btnn__signup">sign up for drive</button>
+          </div>
+
+          <div class="rider__container" *ngIf="activeMenu === 1">
+            <h2>Get in the driver’s seat and get paid</h2>
+            <form class="py-4">
+              <div
+                class="form__control--wrapper d-flex justify-content-between align-items-center mb-2 position-relative"
+              >
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="Enter pickup location"
+                  autoComplete="off"
+                />
+
+                <fa-icon
+                  [icon]="faLocationCrosshairs"
+                  class="icon"
+                  title="My current location"
+                  style="cursor: pointer"
+                ></fa-icon>
+
+                <!-- {/* auto complete  */} -->
+                <!-- <AutoCompleteSearch
+                      topstyle="100%"
+                      cityKeyword={pickupKeyword}
+                      setSelectedLocation={setSelectedPickupLocation}
+                      setSelectedPickupLocationCoordinates={setSelectedPickupLocationCoordinates}
+                      isApiCall={isPickApiCall}
+                      setIsApiCall={setIsPickApiCall}
+                    /> -->
+              </div>
+              <div class="form__control--wrapper mb-2 position-relative">
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="Enter destination"
+                  autoComplete="off"
+                />
+                <!-- {/* auto complete  */} -->
+                <!-- <AutoCompleteSearch
+                      topstyle="100%"
+                      cityKeyword={destinationKeyword}
+                      setSelectedLocation={setSelectedDestinationLocation}
+                      setSelectedDestinationLocationCoordinates={setSelectedDestinationLocationCoordinates}
+                      isApiCall={isDestinationApiCall}
+                      setIsApiCall={setIsDestinationApiCall}
+                    /> -->
+              </div>
+              <button
+                type="button"
+                class="btnn btnn__request"
+                onClick="{requestRideHander}"
+              >
+                request now
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

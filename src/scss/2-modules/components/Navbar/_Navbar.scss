@@ -1,0 +1,96 @@
+.navbar__transparent {
+  background: $black !important;
+  z-index: 10;
+
+  @media screen and (min-width: 992px) {
+    height: 56px;
+  }
+
+  .navbar-brand {
+    @include font_style(1.5rem, bold, normal, uppercase);
+    color: $white;
+    &:hover {
+      color: $grey-300;
+    }
+  }
+  .navbar-toggler-icon > svg {
+    font-size: 2rem;
+    color: $grey-50;
+  }
+
+  .navbar-toggler:focus {
+    outline: 0px !important;
+  }
+  .navbar-collapse {
+    .icon.close__icon > svg {
+      color: $white;
+      display: block !important;
+      margin-left: auto;
+      cursor: pointer;
+      @media screen and (min-width: 992px) {
+        display: none;
+      }
+    }
+    // sidebar styles for mobile
+    @media screen and (max-width: 992px) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300px;
+      background: rgba(0, 0, 0, 0.9);
+      height: 100vh;
+      padding: 1rem;
+      transition: transform 1s ease-in-out;
+      transform: translateX(-100%);
+      &.show {
+        transform: translateX(0);
+      }
+    }
+    @media screen and (max-width: 662px) {
+      width: 100%;
+    }
+  }
+
+  //   navbar nav
+  .navbar-nav {
+    margin-left: auto;
+    .nav-link {
+      @include font_style(1.1rem, 300, normal, capitalize);
+
+      color: $white;
+    }
+    .nav-item {
+      margin-bottom: 1rem;
+      @media screen and (min-width: 992px) {
+        margin-bottom: 0;
+        margin-right: 2rem;
+        &:last-child {
+          margin-right: 0rem;
+        }
+      }
+    }
+    .nav-item a {
+      &:hover {
+        color: $grey-300;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// bell notification
+.bell__notification {
+  position: absolute;
+  top: 0;
+  background-color: $red-dark;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 0;
+  padding: 0.2rem;
+  @include font_style(0.8rem, bold, normal, uppercase);
+  color: whitesmoke;
+}

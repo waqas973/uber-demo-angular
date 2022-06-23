@@ -1,0 +1,72 @@
+.hero__top {
+  margin-top: -3.5rem;
+}
+
+.card-wrapper {
+  //   height: 100%;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  z-index: 4;
+  .card {
+    width: 90vw;
+    max-width: $fixed-width;
+    border-radius: 0px;
+    border: none;
+  }
+  .card-header {
+    padding-bottom: 0rem;
+    padding-left: 1.3rem;
+    padding-right: 1.3rem;
+    @media (min-width: 772px) {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+    p {
+      @include font_style(1.1rem, 500, 1.5rem, capitalize);
+      margin-top: 0.7rem;
+    }
+  }
+  .isActive {
+    border-bottom: 3px solid black;
+  }
+  .card-body {
+    padding: 3rem 1.3rem;
+
+    @media (min-width: 772px) {
+      padding: 3rem 3rem;
+    }
+  }
+  .driver__container {
+    h2 {
+      @include font_style(1.5rem, bold, 1.8rem, capitalize);
+      color: $black;
+      @media screen and (min-width: 662px) {
+        @include font_style(2rem, bold, 2.2rem, capitalize);
+      }
+    }
+    p {
+      @include font_style(1rem, 300, 2rem, capitalize);
+      color: $black-light;
+    }
+    .btnn__signup {
+      @include font_style(1rem, 300, 2rem, capitalize);
+      color: $white;
+    }
+  }
+  .rider__container {
+    h2 {
+      @include font_style(1.5rem, bold, 1.8rem, capitalize);
+      color: $black;
+      @media screen and (min-width: 662px) {
+        @include font_style(2rem, bold, 2.2rem, capitalize);
+      }
+    }
+    .btnn__request {
+      @include font_style(1rem, 300, 2rem, capitalize);
+      color: $white;
+      margin-top: 2rem;
+    }
+  }
+}
