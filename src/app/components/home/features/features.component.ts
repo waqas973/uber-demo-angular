@@ -4,7 +4,7 @@ import {
   faHomeAlt,
   faUserGroup,
 } from '@fortawesome/free-solid-svg-icons';
-import { featureType } from 'src/app/Types';
+import { featureType } from 'src/app/shared/Types';
 
 @Component({
   selector: 'app-features',

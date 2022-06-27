@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { companyMockData } from 'src/app/Types';
+import { companyMockData } from 'src/app/shared/Types';
 
 @Component({
   selector: 'app-footer',

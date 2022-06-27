@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ServiceType } from 'src/app/Types';
+import { ServiceType } from 'src/app/shared/Types';
 
 @Component({
   selector: 'app-services',

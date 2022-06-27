@@ -71,7 +71,12 @@ body {
 .modal {
   background-color: rgba(0, 0, 0, 0.6);
 }
-
+a {
+  text-decoration: none;
+}
+a:hover {
+  color: whitesmoke;
+}
 // auto complete search styles
 .autoComplete__search {
   position: absolute;

@@ -1,0 +1,36 @@
+<main class="signupFor">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 d-flex justify-content-center align-items-center">
+        <div
+          class="d-flex justify-content-center align-items-center wrapper"
+          (click)="openModal('drive')"
+        >
+          <h2>Sign up to drive</h2>
+          <fa-icon [icon]="faArrowRight" class="icon arrow__icon"></fa-icon>
+        </div>
+      </div>
+      <div class="col-md-6 d-flex justify-content-center align-items-center">
+        <div
+          class="d-flex justify-content-center align-items-center wrapper"
+          (click)="openModal('rider')"
+        >
+          <h2>Create a rider account</h2>
+          <fa-icon [icon]="faArrowRight" class="icon arrow__icon"></fa-icon>
+        </div>
+      </div>
+    </div>
+    <!-- {/* go back  */} -->
+    <div class="text-center" style="margin-top: 7rem">
+      <a class="btnn go__back" routerLink="/"> Go Back </a>
+    </div>
+  </div>
+
+  <app-signup-modal
+    [showModal]="showModal"
+    [mode]="mode"
+    (closeModalEvent)="closeModal($event)"
+  ></app-signup-modal>
+
+  <!-- <ToastContainer />  -->
+</main>

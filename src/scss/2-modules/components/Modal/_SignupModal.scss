@@ -34,5 +34,10 @@
     color: $white;
     width: 7rem;
     padding: 0.8rem 0.3rem;
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: $disable-color;
+    }
   }
 }

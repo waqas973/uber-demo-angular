@@ -1,0 +1,14 @@
+<div
+  class="autoComplete__search"
+  style="max-height: 13rem; overflow-x: hidden; overflow-y: auto"
+  [ngStyle]="{ top: topstyle && topstyle }"
+  [ngStyle]="{
+    display: cityKeyword && cities_data.length > 0 ? 'block' : 'none'
+  }"
+>
+  <ul *ngFor="let city of cities_data">
+    <li (click)="selectedCity(city)">
+      {{ city.name }}
+    </li>
+  </ul>
+</div>

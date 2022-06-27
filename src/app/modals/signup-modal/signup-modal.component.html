@@ -1,0 +1,265 @@
+<div
+  class="signupModal modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabIndex="-1"
+  aria-labelledby="staticBackdropLabel"
+  [ngClass]="{ 'showModal show': showModal }"
+  [ngStyle]="{ display: showModal ? 'block' : 'none' }"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Signup for uber</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+
+      <div class="modal-body">
+        <!-- {/* form  */} -->
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" novalidate>
+          <!-- {/* first name  */} -->
+          <div class="mb-4">
+            <label for="first_name" class="form-label"> First name </label>
+            <input
+              type="text"
+              class="form-control"
+              name="first_name"
+              id="first_name"
+              formControlName="first_name"
+              placeholder="First Name"
+              [ngClass]="{
+                'is-invalid': firstName?.invalid && firstName?.touched
+              }"
+            />
+
+            <small
+              class="text-danger"
+              *ngIf="firstName?.invalid && firstName?.touched"
+              >This field is required</small
+            >
+          </div>
+          <!-- {/* last name  */} -->
+          <div class="mb-4">
+            <label for="last_name" class="form-label"> Last name </label>
+            <input
+              type="text"
+              name="last_name"
+              class="form-control"
+              formControlName="last_name"
+              id="last_name"
+              placeholder="Last Name"
+              [ngClass]="{
+                'is-invalid': lastName?.invalid && lastName?.touched
+              }"
+            />
+            <small
+              class="text-danger"
+              *ngIf="lastName?.invalid && lastName?.touched"
+              >This field is required</small
+            >
+          </div>
+
+          <!-- {/* email  */} -->
+          <div class="mb-4">
+            <label for="email" class="form-label"> Enter your email </label>
+            <input
+              type="text"
+              name="email"
+              class="form-control"
+              formControlName="email"
+              id="email"
+              placeholder="Email"
+              [ngClass]="{
+                'is-invalid': email?.invalid && email?.touched
+              }"
+            />
+            <small class="text-danger" *ngIf="email?.invalid && email?.touched"
+              >This field is required</small
+            >
+          </div>
+          <!-- {/* phone number */} -->
+          <div class="mb-4">
+            <label for="phone_number" class="form-label">
+              Enter your phone number
+            </label>
+            <input
+              type="text"
+              name="phone_number"
+              class="form-control"
+              formControlName="phone_number"
+              id="phone_number"
+              placeholder="phone number"
+              [ngClass]="{
+                'is-invalid': phoneNumber?.invalid && phoneNumber?.touched
+              }"
+            />
+            <small
+              class="text-danger"
+              *ngIf="phoneNumber?.invalid && phoneNumber?.touched"
+              >This field is required</small
+            >
+          </div>
+          <!-- {/* profile picture */} -->
+          <div class="mb-4">
+            <label for="partner_photo" class="form-label">
+              Profile Picture
+            </label>
+            <input
+              type="file"
+              name="partner_photo"
+              formControlName="partner_photo"
+              id="partner_photo"
+              class="form-control"
+              (change)="uploadImage($event.target, 'partner_photo')"
+              [ngClass]="{
+                'is-invalid': partner_photo_error
+              }"
+            />
+
+            <small class="text-danger" *ngIf="partner_photo_error">{{
+              partner_photo_error
+            }}</small>
+          </div>
+          <!-- {/*  user is driver  */} -->
+
+          <ng-container *ngIf="mode === 'drive'">
+            <!-- {/* city  */} -->
+            <div class="mb-4 position-relative">
+              <label for="city" class="form-label"> Enter your city </label>
+              <input
+                type="text"
+                name="city"
+                class="form-control"
+                formControlName="city"
+                id="city"
+                placeholder="City you'll be drive in"
+                autoComplete="off"
+                [ngClass]="{
+                  'is-invalid': isCityNotSelected
+                }"
+              />
+              <app-auto-complete-cities
+                [topstyle]="topstyle"
+                [cityKeyword]="cityKeyword"
+                (selectedLocationFunc)="selectedLocationFunc($event)"
+              ></app-auto-complete-cities>
+              <small class="text-danger" *ngIf="isCityNotSelected"
+                >Please select city from dropdown list</small
+              >
+            </div>
+            <!-- {/* vehicle type  */} -->
+            <div class="mb-4">
+              <label for="vehicle" class="form-label"> Vehicle Type </label>
+              <select
+                class="form-select"
+                name="vehicle_type"
+                formControlName="vehicle_type"
+                [ngClass]="{
+                  'is-invalid': vehicleType?.invalid && vehicleType?.touched
+                }"
+                [value]="vehicleType?.value"
+              >
+                <option
+                  [value]="vehicle_type.value"
+                  *ngFor="let vehicle_type of vehicleTypes"
+                >
+                  {{ vehicle_type.text }}
+                </option>
+              </select>
+              <small
+                class="text-danger"
+                *ngIf="vehicleType?.invalid && vehicleType?.touched"
+                >This field is required</small
+              >
+            </div>
+            <!-- {/* vehicle registration book  */} -->
+            <div class="mb-4">
+              <label for="vehicle_registration_book" class="form-label">
+                Vehicle Registration Book Image
+              </label>
+              <input
+                class="form-control"
+                name="vehicle_registration_book"
+                type="file"
+                id="vehicle_registration_book"
+                formControlName="vehicle_registration_book"
+                (change)="
+                  uploadImage($event.target, 'vehicle_registration_book')
+                "
+                [ngClass]="{
+                  'is-invalid': vehicle_registration_book_error
+                }"
+              />
+              <small
+                class="text-danger"
+                *ngIf="vehicle_registration_book_error"
+                >{{ vehicle_registration_book_error }}</small
+              >
+            </div>
+            <!-- {/* driving license image  */} -->
+            <div class="mb-4">
+              <label for="driving_licence_front_side" class="form-label">
+                Driving Licence Image ( front side )
+              </label>
+              <input
+                class="form-control"
+                type="file"
+                name="driving_licence_front_side"
+                id="driving_licence_front_side"
+                formControlName="driving_licence_front_side"
+                (change)="
+                  uploadImage($event.target, 'driving_licence_front_side')
+                "
+                [ngClass]="{
+                  'is-invalid': driving_licence_front_side_error
+                }"
+              />
+              <small
+                class="text-danger"
+                *ngIf="driving_licence_front_side_error"
+                >{{ driving_licence_front_side_error }}</small
+              >
+            </div>
+          </ng-container>
+
+          <!-- {/* password  */} -->
+          <div class="mb-4">
+            <label for="password" class="form-label"> Enter password </label>
+            <input
+              type="text"
+              name="password"
+              class="form-control"
+              id="password"
+              placeholder="Password"
+              formControlName="password"
+              [ngClass]="{
+                'is-invalid': password?.invalid && password?.touched
+              }"
+            />
+            <div *ngIf="password?.invalid && password?.touched">
+              <small class="text-danger" *ngIf="password?.errors?.['required'] "
+                >This field is required</small
+              >
+              <small class="text-danger" *ngIf="password?.errors?.['pattern'] "
+                >Password must contain at least 8 characters, one uppercase, one
+                lowercase, one number and one special character
+              </small>
+            </div>
+          </div>
+          <div class="mb-4 text-end">
+            <button
+              type="submit"
+              class="btnn btnn__submit"
+              [disabled]="!signupForm.valid"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+        <!-- {/* form end  */} -->
+      </div>
+    </div>
+  </div>
+  <!-- {isLoading && <LoaderWithBackground />} -->
+</div>
