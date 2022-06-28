@@ -13,6 +13,13 @@ import { SignupComponent } from './components/signup/signup.component';
 import { SignupModalComponent } from './modals/signup-modal/signup-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AutoCompleteCitiesComponent } from './components/auto-complete-cities/auto-complete-cities.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpHeaderInterceptor } from './interceptors/http-header-interceptor';
+import { HttpErrorInterceptor } from './interceptors/http-error-interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { LoaderComponent } from './components/loader/loader.component';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
 @NgModule({
   declarations: [
@@ -26,14 +33,30 @@ import { AutoCompleteCitiesComponent } from './components/auto-complete-cities/a
     SignupComponent,
     SignupModalComponent,
     AutoCompleteCitiesComponent,
+    LoaderComponent,
+    VerifyEmailComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpHeaderInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

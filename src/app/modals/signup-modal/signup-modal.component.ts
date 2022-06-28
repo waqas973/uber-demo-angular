@@ -9,7 +9,14 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { signupType, vehicleType } from 'src/app/shared/Types';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { HttpService } from 'src/app/services/http.service';
+import {
+  additionalSignupFormType,
+  additionalSignupType,
+  vehicleType,
+} from 'src/app/shared/Types';
 import jsonData from '../../shared/data.json';
 @Component({
   selector: 'app-signup-modal',
@@ -18,7 +25,8 @@ import jsonData from '../../shared/data.json';
 export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
   // properties
   vehicleTypes: vehicleType[] = jsonData.vehicle_type;
-  signupForm!: FormGroup<signupType>;
+  signupForm!: FormGroup<additionalSignupFormType>;
+  // FormGroup<signupType>
   topstyle: string = '100%';
   cityKeyword: string | null = '';
   selectedLocation!: string;
@@ -29,6 +37,8 @@ export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
   vehicle_registration_book_file!: File;
   driving_licence_front_side_error: string = '';
   driving_licence_front_side_file!: File;
+  error_message: string = '';
+  loading: boolean = false;
   /**
    *
    *  @Input and @Output
@@ -38,7 +48,12 @@ export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
   @Output() closeModalEvent = new EventEmitter<boolean>();
 
   // constructor
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private httpClient: HttpService,
+    private toastr: ToastrService,
+    private _router: Router
+  ) {}
 
   /**
    *
@@ -104,7 +119,7 @@ export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
     });
 
     // track for change the value of city input field
-    this.city?.valueChanges.subscribe((value) => {
+    this.city?.valueChanges.subscribe((value: string | null): void => {
       if (this.selectedLocation !== value) {
         this.selectedLocation = '';
       }
@@ -223,11 +238,19 @@ export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
         !this.vehicle_registration_book_error &&
         !this.driving_licence_front_side_error
       ) {
-        console.log(this.signupForm.value);
-        console.log(this.selectedLocation);
-        console.log(this.partner_photo_file);
-        console.log(this.vehicle_registration_book_file);
-        console.log(this.driving_licence_front_side_file);
+        let account_type = 'drive_and_deliver';
+        let { first_name, last_name, email, phone_number, password } =
+          this.signupForm.value;
+        const postingData = {
+          first_name,
+          last_name,
+          email,
+          phone_number,
+          password,
+          account_type,
+          city: this.selectedLocation,
+        };
+        this.submitFormData(postingData);
       }
     } else {
       this.isCityNotSelected = true;
@@ -237,9 +260,62 @@ export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
   // validate  additional ride fields
   valideRideFields() {
     if (!this.partner_photo_error) {
-      console.log(this.signupForm.value);
-      console.log(this.partner_photo_file);
+      let account_type = 'rider';
+      let { first_name, last_name, email, phone_number, password } =
+        this.signupForm.value;
+      const postingData = {
+        first_name,
+        last_name,
+        email,
+        phone_number,
+        password,
+        account_type,
+      };
+      this.submitFormData(postingData);
     }
+  }
+
+  /**
+   * submit form data
+   */
+
+  submitFormData<T>(data: T) {
+    this.loading = true;
+    const formData = new FormData();
+
+    for (const key in data) {
+      formData.append(key, data[key] as any);
+    }
+
+    if (this.partner_photo_file) {
+      formData.append('partner_photo', this.partner_photo_file);
+    }
+
+    if (this.vehicle_registration_book_file) {
+      formData.append(
+        'vehicle_registration_book',
+        this.vehicle_registration_book_file
+      );
+    }
+
+    if (this.driving_licence_front_side_file) {
+      formData.append(
+        'driving_licence_front_side',
+        this.driving_licence_front_side_file
+      );
+    }
+
+    // Api call
+    this.httpClient.signup(formData).subscribe(
+      (data: additionalSignupType) => {
+        this.loading = false;
+        this._router.navigate(['verify-email']);
+      },
+      (err) => {
+        this.loading = false;
+        this.toastr.error(err);
+      }
+    );
   }
 
   /**

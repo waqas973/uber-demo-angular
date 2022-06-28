@@ -1,0 +1,49 @@
+<main class="verify-email">
+  <div class="container">
+    <div class="row">
+      <!-- {/* col-6  */} -->
+      <div class="col-12 col-lg-6 mx-auto">
+        <div class="card shadow-lg">
+          <!-- {/* card-body  */} -->
+          <div class="card-body">
+            <h5 class="card-title">
+              An email verification code is send to your email please verify
+              your account before login
+            </h5>
+            <form [formGroup]="verifyEmailForm" (ngSubmit)="onSubmit()">
+              <div class="mb-4">
+                <label for="enter_code" class="form-label"> Enter Code </label>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  id="enter_code"
+                  placeholder="Enter code"
+                  formControlName="code"
+                  [ngClass]="{
+                    'is-invalid': emailCode?.invalid && emailCode?.touched
+                  }"
+                />
+                <small
+                  class="text-danger"
+                  *ngIf="emailCode?.invalid && emailCode?.touched"
+                  >This field is required</small
+                >
+              </div>
+              <button
+                type="submit"
+                class="btnn btnn__submit"
+                [disabled]="!verifyEmailForm.valid"
+              >
+                verify email
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="loading">
+    <app-loader></app-loader>
+  </ng-container>
+</main>
