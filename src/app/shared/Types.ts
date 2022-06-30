@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 export interface ServiceType {
@@ -24,34 +24,78 @@ export interface vehicleType {
 }
 
 export interface signupType {
-  first_name: string | Blob | null;
-  last_name: string | Blob | null;
-  email: string | Blob | null;
-  phone_number: string | Blob | null;
-  partner_photo?: string | Blob | null;
-  password: string | Blob | null;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  partner_photo?: string;
+  password: string;
 }
 
 export interface additionalSignupType extends signupType {
-  city?: string | Blob | null;
-  vehicle_type?: string | Blob | null;
-  vehicle_registration_book?: string | Blob | null;
-  driving_licence_front_side?: string | Blob | null;
-}
-export interface signupFormType {
-  first_name: FormControl<string | null>;
-  last_name: FormControl<string | null>;
-  email: FormControl<string | null>;
-  phone_number: FormControl<string | null>;
-  partner_photo: FormControl<string | null>;
-  password: FormControl<string | null>;
+  city?: string;
+  vehicle_type?: string;
+  vehicle_registration_book?: string;
+  driving_licence_front_side?: string;
 }
 
-export interface additionalSignupFormType extends signupFormType {
-  city: FormControl<string | null>;
-  vehicle_type: FormControl<string | null>;
-  vehicle_registration_book: FormControl<string | null>;
-  driving_licence_front_side: FormControl<string | null>;
+export interface signupFormType extends FormGroup {
+  value: additionalSignupType;
+
+  controls: {
+    first_name: AbstractControl;
+    last_name: AbstractControl;
+    email: AbstractControl;
+    phone_number: AbstractControl;
+    partner_photo?: AbstractControl;
+    password: AbstractControl;
+    city?: AbstractControl;
+    vehicle_type?: AbstractControl;
+    vehicle_registration_book?: AbstractControl;
+    driving_licence_front_side?: AbstractControl;
+  };
+}
+
+export interface loginType {
+  email: string;
+  password: string;
+}
+
+export interface loginFormType extends FormGroup {
+  value: loginType;
+
+  controls: {
+    email: AbstractControl;
+    password: AbstractControl;
+  };
+}
+
+export interface resendEmailFormType extends FormGroup {
+  value: { email: string };
+
+  controls: {
+    email: AbstractControl;
+  };
+}
+
+export interface resendEmailApiResponse {
+  status?: string;
+  response?: string;
+}
+
+export interface newPasswordFormType extends FormGroup {
+  value: { password: string; token: string };
+
+  controls: {
+    password: AbstractControl;
+    token: AbstractControl;
+  };
+}
+
+export interface loginApiResponseType {
+  access?: string;
+  refresh?: string;
+  user_detail: additionalSignupType;
 }
 
 export interface citiesType {

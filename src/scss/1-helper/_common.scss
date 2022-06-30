@@ -77,6 +77,9 @@ a {
 a:hover {
   color: whitesmoke;
 }
+a.link:hover {
+  color: skyblue;
+}
 // auto complete search styles
 .autoComplete__search {
   position: absolute;
@@ -146,7 +149,7 @@ a:hover {
     object-fit: cover;
     border-radius: 50%;
   }
-  .icon {
+  .icon svg {
     font-size: 1rem;
     color: $white;
     margin-left: 0.4rem;

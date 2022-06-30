@@ -111,7 +111,7 @@
               formControlName="partner_photo"
               id="partner_photo"
               class="form-control"
-              (change)="uploadImage($event.target, 'partner_photo')"
+              (change)="uploadImage($event, 'partner_photo')"
               [ngClass]="{
                 'is-invalid': partner_photo_error
               }"
@@ -184,9 +184,7 @@
                 type="file"
                 id="vehicle_registration_book"
                 formControlName="vehicle_registration_book"
-                (change)="
-                  uploadImage($event.target, 'vehicle_registration_book')
-                "
+                (change)="uploadImage($event, 'vehicle_registration_book')"
                 [ngClass]="{
                   'is-invalid': vehicle_registration_book_error
                 }"
@@ -208,9 +206,7 @@
                 name="driving_licence_front_side"
                 id="driving_licence_front_side"
                 formControlName="driving_licence_front_side"
-                (change)="
-                  uploadImage($event.target, 'driving_licence_front_side')
-                "
+                (change)="uploadImage($event, 'driving_licence_front_side')"
                 [ngClass]="{
                   'is-invalid': driving_licence_front_side_error
                 }"

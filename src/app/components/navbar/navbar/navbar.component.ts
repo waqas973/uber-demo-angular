@@ -4,6 +4,10 @@ import {
   faXmark,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { loginStateType } from 'src/app/state/reducer/loginReducer';
+import { loginSelector } from 'src/app/state/selectors';
 
 @Component({
   selector: 'app-navbar',
@@ -13,9 +17,20 @@ export class NavbarComponent implements OnInit {
   faBars: IconDefinition = faBars;
   faXmark: IconDefinition = faXmark;
   show: boolean = false;
-  constructor() {}
+  auth$!: Observable<loginStateType>;
+  profile_pic?: string;
+  loginUserdata!: loginStateType;
 
-  ngOnInit(): void {}
+  constructor(private store: Store) {}
+
+  ngOnInit(): void {
+    this.auth$ = this.store.pipe(select(loginSelector));
+    this.auth$.subscribe((value) => {
+      this.loginUserdata = value;
+      this.profile_pic = value?.userData?.user_detail?.partner_photo;
+      console.log(value);
+    });
+  }
 
   handleMenu() {
     this.show = !this.show;

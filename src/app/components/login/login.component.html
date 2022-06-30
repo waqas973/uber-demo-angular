@@ -1,0 +1,125 @@
+<main class="verify-email">
+  <div class="container">
+    <div class="row">
+      <!-- {/* col-6  */} -->
+      <div class="col-12 col-lg-6 mx-auto">
+        <div class="card shadow-lg">
+          <!-- {/* card-body  */} -->
+          <div class="card-body">
+            <h5 class="card-title text-center">Login</h5>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="mb-4">
+                <label for="email" class="form-label"> Enter email </label>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  placeholder="Enter email"
+                  formControlName="email"
+                  [ngClass]="{ 'is-invalid': email?.invalid && email?.touched }"
+                />
+                <small
+                  class="text-danger"
+                  *ngIf="email?.invalid && email?.touched"
+                  >This field is required</small
+                >
+              </div>
+              <div class="mb-4">
+                <label for="password" class="form-label">
+                  Enter password
+                </label>
+
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="Enter password"
+                  formControlName="password"
+                  [ngClass]="{
+                    'is-invalid': password?.invalid && password?.touched
+                  }"
+                />
+                <small
+                  class="text-danger"
+                  *ngIf="password?.invalid && password?.touched"
+                  >This field is required</small
+                >
+                <!-- forget password  -->
+                <div class="text-end">
+                  <button
+                    type="button"
+                    style="
+                      border: none;
+                      outline: none;
+                      box-shadow: none;
+                      background: transparent;
+                      color: skyblue;
+                    "
+                    (click)="handleNagivate('forget-password')"
+                  >
+                    forget password?
+                  </button>
+                </div>
+              </div>
+
+              <!-- show error message if user not found or api not working  -->
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="!loading && errorMessage"
+              >
+                {{ errorMessage }}
+              </div>
+
+              <button
+                type="submit"
+                class="btnn btnn__submit"
+                [disabled]="!loginForm.valid"
+              >
+                login
+              </button>
+            </form>
+            <!-- or verify-email  line -->
+            <div style="position: relative" class="mb-4">
+              <hr />
+              <h4
+                class="text-dark text-center"
+                style="
+                  position: absolute;
+                  top: -1rem;
+                  left: 46%;
+                  background: white;
+                  z-index: 1;
+                  padding: 0.1rem 0.2rem;
+                "
+              >
+                or
+              </h4>
+            </div>
+            <!-- verify email  -->
+            <div class="text-center">
+              <button
+                type="button"
+                style="
+                  border: none;
+                  outline: none;
+                  box-shadow: none;
+                  background: transparent;
+                  color: skyblue;
+                "
+                (click)="handleNagivate('resend-email-code')"
+              >
+                Verify Email
+              </button>
+            </div>
+            <!-- verify email end  -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="loading">
+    <app-loader></app-loader>
+  </ng-container>
+</main>

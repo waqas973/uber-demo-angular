@@ -1,0 +1,69 @@
+<main class="verify-email">
+  <div class="container">
+    <div class="row">
+      <!-- {/* col-6  */} -->
+      <div class="col-12 col-lg-6 mx-auto">
+        <div class="card shadow-lg">
+          <!-- {/* card-body  */} -->
+          <div class="card-body">
+            <h5 class="card-title text-center">
+              <!-- display text on the base of action mode value  -->
+              <ng-container
+                *ngIf="actionModeValue && actionModeValue === 'forget-password'"
+              >
+                Forget Password
+              </ng-container>
+              <ng-container
+                *ngIf="actionModeValue && actionModeValue !== 'forget-password'"
+              >
+                Verify Your Email
+              </ng-container>
+            </h5>
+            <form [formGroup]="resendEmail" (ngSubmit)="onSubmit()">
+              <div class="mb-4">
+                <label for="email" class="form-label"> Enter email </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  placeholder="Enter email"
+                  formControlName="email"
+                  [ngClass]="{
+                    'is-invalid':
+                      this.resendEmail.invalid && this.resendEmail.touched
+                  }"
+                />
+                <small
+                  *ngIf="this.resendEmail.invalid && this.resendEmail.touched"
+                  class="text-danger"
+                >
+                  This field is required
+                </small>
+              </div>
+              <!-- show error message if user not found or api not working  -->
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="!loading && errorMessage"
+              >
+                {{ errorMessage }}
+              </div>
+
+              <button
+                type="submit"
+                class="btnn btnn__submit"
+                [disabled]="!this.resendEmail.valid"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- loading  -->
+  <ng-container *ngIf="loading">
+    <app-loader></app-loader>
+  </ng-container>
+</main>

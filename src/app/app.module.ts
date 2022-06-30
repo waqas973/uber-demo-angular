@@ -20,6 +20,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { LoaderComponent } from './components/loader/loader.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { LoginComponent } from './components/login/login.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { ResendEmailComponent } from './components/resend-email/resend-email.component';
+import { NewPasswordComponent } from './components/new-password/new-password.component';
+import { AuthGuardService } from './services/authGuardService';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginAuthGuardService } from './services/loginAuthGuardService';
+import { AuthUserSubnavComponent } from './components/navbar/auth-user-subnav/auth-user-subnav.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +45,11 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
     AutoCompleteCitiesComponent,
     LoaderComponent,
     VerifyEmailComponent,
+    LoginComponent,
+    ResendEmailComponent,
+    NewPasswordComponent,
+    DashboardComponent,
+    AuthUserSubnavComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +59,11 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
   ],
   providers: [
     {
@@ -56,6 +76,8 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
       useClass: HttpErrorInterceptor,
       multi: true,
     },
+    AuthGuardService,
+    LoginAuthGuardService,
   ],
   bootstrap: [AppComponent],
 })

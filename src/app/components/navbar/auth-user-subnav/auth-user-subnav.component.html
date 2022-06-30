@@ -1,0 +1,37 @@
+<div class="d-flex align-items-center">
+  <!-- {unreadCount > 0 && (
+      <div class="position-relative" style={{ cursor: "pointer" }} onClick={() => navigator("/chat")}>
+        <BsChat class="icon__bell " style={{ color: "white", fontSize: "1.6rem", marginRight: "2rem" }} />
+        <div class="bell__notification">{unreadCount}</div>
+      </div>
+    )} -->
+  <div class="dropdown hide__dropdown">
+    <div
+      class="avatar__container dropdown-toggle"
+      id="dropdownMenuButton1"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      <img [src]="profile_pic ? profile_pic : null" alt="avatar" />
+      <fa-icon [icon]="faChevronDown" class="icon"></fa-icon>
+    </div>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <li *ngFor="let userdropdown of authUserDropdown">
+        <a class="dropdown-item" routerLink="#">
+          <img [src]="userdropdown.imageSrc" [alt]="userdropdown.text" />
+          <span>{{ userdropdown.text }}</span>
+        </a>
+      </li>
+
+      <li>
+        <button class="dropdown-item" type="button" (click)="logout()">
+          <img
+            src="https://www.olx.com.pk/assets/iconLogout_noinline.9da9ed94dfe84e900cc1ae3198b0375b.svg"
+            alt="logout"
+          />
+          <span>logout</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -42,12 +42,14 @@ export class VerifyEmailComponent implements OnInit {
   // submit data
   onSubmit() {
     this.loading = true;
-    this.http.verifyEmail(this.verifyEmailForm.value).subscribe(
+    const { code } = this.verifyEmailForm.value;
+    const submitting_data = { code };
+    this.http.verifyEmail(submitting_data).subscribe(
       () => {
         this.loading = false;
         this._toastr.success('Email verified successfully');
         setTimeout(() => {
-          this._router.navigate(['/']);
+          this._router.navigate(['/login']);
         }, 3000);
       },
       (error) => {

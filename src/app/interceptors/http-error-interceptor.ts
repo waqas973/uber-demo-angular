@@ -24,8 +24,15 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             errorMsg = `${error.error.email[0]}`;
           } else if (error.error.response) {
             errorMsg = 'Invalid code';
-          } else if (error.error.response.data.response) {
+          } else if (error.error?.response?.data?.response) {
             errorMsg = 'Invalid code';
+          } else if (error.error.detail) {
+            if (error.error.detail === 'Not found.') {
+              errorMsg = 'Incorrect token or token has been expired';
+            }
+            errorMsg = error.error.detail;
+          } else if (error.error?.non_field_errors) {
+            errorMsg = error.error?.non_field_errors;
           } else {
             errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
           }

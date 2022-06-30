@@ -8,25 +8,28 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpService } from 'src/app/services/http.service';
 import {
-  additionalSignupFormType,
   additionalSignupType,
+  signupFormType,
   vehicleType,
 } from 'src/app/shared/Types';
 import jsonData from '../../shared/data.json';
+
+// Component
 @Component({
   selector: 'app-signup-modal',
   templateUrl: './signup-modal.component.html',
 })
+
+// main class
 export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
   // properties
   vehicleTypes: vehicleType[] = jsonData.vehicle_type;
-  signupForm!: FormGroup<additionalSignupFormType>;
-  // FormGroup<signupType>
+  signupForm!: signupFormType;
   topstyle: string = '100%';
   cityKeyword: string | null = '';
   selectedLocation!: string;
@@ -39,6 +42,7 @@ export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
   driving_licence_front_side_file!: File;
   error_message: string = '';
   loading: boolean = false;
+
   /**
    *
    *  @Input and @Output
@@ -116,7 +120,7 @@ export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
           ),
         ],
       ],
-    });
+    }) as signupFormType;
 
     // track for change the value of city input field
     this.city?.valueChanges.subscribe((value: string | null): void => {
@@ -161,7 +165,7 @@ export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   // check if image upload and valide image
-  uploadImage(file: any, filemode: string) {
+  uploadImage(file: Event, filemode: string) {
     if (this.partner_photo_error && filemode === 'partner_photo') {
       this.partner_photo_error = '';
     }
@@ -179,18 +183,18 @@ export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     const acceptedImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-    let image = file.files;
+    let image = (file.target as HTMLInputElement).files as FileList;
 
     if (image.length > 0) {
       if (acceptedImageTypes.includes(image[0].type)) {
         if (filemode === 'partner_photo') {
-          this.partner_photo_file = file.files[0];
+          this.partner_photo_file = image[0];
         }
         if (filemode === 'vehicle_registration_book') {
-          this.vehicle_registration_book_file = file.files[0];
+          this.vehicle_registration_book_file = image[0];
         }
         if (filemode === 'driving_licence_front_side') {
-          this.driving_licence_front_side_file = file.files[0];
+          this.driving_licence_front_side_file = image[0];
         }
       } else {
         if (filemode === 'partner_photo') {
@@ -279,12 +283,12 @@ export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
    * submit form data
    */
 
-  submitFormData<T>(data: T) {
+  submitFormData(data: additionalSignupType) {
     this.loading = true;
     const formData = new FormData();
 
     for (const key in data) {
-      formData.append(key, data[key] as any);
+      formData.append(key, data[key as keyof additionalSignupType]!);
     }
 
     if (this.partner_photo_file) {
@@ -307,7 +311,7 @@ export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
 
     // Api call
     this.httpClient.signup(formData).subscribe(
-      (data: additionalSignupType) => {
+      () => {
         this.loading = false;
         this._router.navigate(['verify-email']);
       },

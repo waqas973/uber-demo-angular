@@ -2668,5 +2668,28 @@
       "lat": "30.38244",
       "lng": "67.72562"
     }
+  ],
+
+  "authUserDropdown": [
+    {
+      "link": "/",
+      "text": "Buy business packages",
+      "imageSrc": "https://www.olx.com.pk/assets/iconBusinessPackages_noinline.64a7db94ef2eb1776d43916ce82b1a40.svg"
+    },
+    {
+      "link": "/",
+      "text": "Bought Packages & Billing",
+      "imageSrc": "https://www.olx.com.pk/assets/iconBoughtPackages_noinline.b29b2b61c39def95f4bf58ac5b6dbb59.svg"
+    },
+    {
+      "link": "/",
+      "text": "help",
+      "imageSrc": "https://www.olx.com.pk/assets/iconHelp_noinline.f07d255148323e318808a50c52097d0c.svg"
+    },
+    {
+      "link": "/",
+      "text": "settings",
+      "imageSrc": "https://www.olx.com.pk/assets/iconHelp_noinline.f07d255148323e318808a50c52097d0c.svg"
+    }
   ]
 }
