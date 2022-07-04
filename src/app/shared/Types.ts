@@ -37,6 +37,7 @@ export interface additionalSignupType extends signupType {
   vehicle_type?: string;
   vehicle_registration_book?: string;
   driving_licence_front_side?: string;
+  account_type?: string;
 }
 
 export interface signupFormType extends FormGroup {
@@ -103,4 +104,22 @@ export interface citiesType {
   name: string;
   lat: string;
   lng: string;
+}
+
+export interface selectedFromType {
+  label: string;
+  x: number;
+  y: number;
+  mode?: string;
+}
+
+type place_name_enType = string;
+export type centerType = [number, number];
+
+export type featuresType = {
+  place_name_en: place_name_enType;
+  center: centerType;
+};
+export interface ApiResponsePlacesType {
+  features: featuresType[];
 }

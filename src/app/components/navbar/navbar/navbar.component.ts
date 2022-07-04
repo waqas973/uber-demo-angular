@@ -28,7 +28,6 @@ export class NavbarComponent implements OnInit {
     this.auth$.subscribe((value) => {
       this.loginUserdata = value;
       this.profile_pic = value?.userData?.user_detail?.partner_photo;
-      console.log(value);
     });
   }
 

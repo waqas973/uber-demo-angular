@@ -21,15 +21,15 @@ const loginReducer = createReducer(
       IsUserLogIn: true,
       userData: payload,
     })
+  ),
+  on(
+    actions.logoutAction,
+    (state): loginStateType => ({
+      ...state,
+      IsUserLogIn: false,
+      userData: null,
+    })
   )
-  // on(
-  //   actions.logoutAction,
-  //   (state): loginStateType => ({
-  //     ...state,
-  //     IsUserLogIn: false,
-  //     userData: null,
-  //   })
-  // )
 );
 
 export function reducers(state: loginStateType, action: Action) {

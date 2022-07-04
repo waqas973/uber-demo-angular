@@ -1,3 +1,12 @@
 <app-navbar></app-navbar>
-<p>dashboard works!</p>
+<main>
+  <div id="map" style="width: 100%; z-index: 2"></div>
+  <!-- base on condition render component  -->
+  <ng-container *ngIf="isUser && !currentRide">
+    <app-address-picker
+      [selectedFrom]="selectedFrom"
+      [selectedTo]="selectedTo"
+    ></app-address-picker>
+  </ng-container>
+</main>
 <app-footer></app-footer>

@@ -39,7 +39,7 @@
 
           <div class="rider__container" *ngIf="activeMenu === 1">
             <h2>Get in the driver’s seat and get paid</h2>
-            <form class="py-4">
+            <div class="py-4">
               <div
                 class="form__control--wrapper d-flex justify-content-between align-items-center mb-2 position-relative"
               >
@@ -48,16 +48,25 @@
                   class="form-input"
                   placeholder="Enter pickup location"
                   autoComplete="off"
+                  [(ngModel)]="searchPickup"
+                  (ngModelChange)="onInputChanged($event, 'pickup')"
                 />
 
                 <fa-icon
                   [icon]="faLocationCrosshairs"
                   class="icon"
                   title="My current location"
-                  style="cursor: pointer"
+                  style="cursor: pointer; margin-top: 5px"
                 ></fa-icon>
 
                 <!-- {/* auto complete  */} -->
+                <app-auto-complete-search
+                  [topstyle]="tostyle"
+                  [cityKeyword]="pickupKeyword"
+                  mode="pickup"
+                  [isApiCall]="isPickApiCall"
+                  (userSelectedPlace)="userSelectedPlace($event)"
+                ></app-auto-complete-search>
                 <!-- <AutoCompleteSearch
                       topstyle="100%"
                       cityKeyword={pickupKeyword}
@@ -73,8 +82,18 @@
                   class="form-input"
                   placeholder="Enter destination"
                   autoComplete="off"
+                  [(ngModel)]="searchDestination"
+                  (ngModelChange)="onInputChanged($event, 'destination')"
                 />
                 <!-- {/* auto complete  */} -->
+                <app-auto-complete-search
+                  [topstyle]="tostyle"
+                  [cityKeyword]="destinationKeyword"
+                  mode="destination"
+                  [isApiCall]="isDestinationApiCall"
+                  (userSelectedPlace)="userSelectedPlace($event)"
+                ></app-auto-complete-search>
+
                 <!-- <AutoCompleteSearch
                       topstyle="100%"
                       cityKeyword={destinationKeyword}
@@ -91,7 +110,7 @@
               >
                 request now
               </button>
-            </form>
+            </div>
           </div>
         </div>
       </div>

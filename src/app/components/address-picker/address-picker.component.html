@@ -1,0 +1,88 @@
+<div class="address">
+  <div class="address__title">
+    <div class="address__title-container">
+      <p class="address__title-from" (click)="changeFrom(true)">
+        {{
+          selectedFrom && selectedFrom.label
+            ? selectedFrom.label
+            : "Pickup location ?"
+        }}
+      </p>
+      <p class="address__title-to" (click)="changeFrom(false)">
+        {{
+          selectedTo && selectedTo.label ? selectedTo.label : "Destination ?"
+        }}
+      </p>
+    </div>
+  </div>
+  <div class="search position-relative">
+    <input
+      class="search__input"
+      type="text"
+      [placeholder]="
+        isFrom ? 'Add a pickup location' : 'Enter your destination'
+      "
+      [(ngModel)]="searchinput"
+      (ngModelChange)="onInputChanged($event)"
+    />
+    <!-- onChange={onInputChanged}
+      ref={searchRef} -->
+    <!-- {isFrom && ( -->
+    <ng-container *ngIf="isFrom">
+      <fa-icon
+        [icon]="faLocationCrosshairs"
+        class="icon"
+        title="My current location"
+        style="cursor: pointer; position: absolute; top: 30px; right: 20px"
+      >
+      </fa-icon>
+    </ng-container>
+
+    <!-- onClick={getUserCurrentLocation} -->
+
+    <!-- {/* search location result  */} -->
+    <div class="search__result">
+      <ng-container *ngIf="searchResults && searchResults.length !== 0">
+        <div class="search__result-item" *ngFor="let result of searchResults">
+          <!-- onClick={() => onLocationSelected(result)} -->
+          <div class="search__result-icon">
+            <svg
+              title="LocationMarkerFilled"
+              viewBox="0 0 24 24"
+              class="g2 ec db"
+            >
+              <g
+                transform="matrix( 1 0 0 1 2.524993896484375 1.0250244140625 )"
+              >
+                <path
+                  fillRule="nonzero"
+                  clipRule="nonzero"
+                  d="M16.175 2.775C12.475 -0.925 6.475 -0.925 2.775 2.775C-0.925 6.475 -0.925 12.575 2.775 16.275L9.475 22.975L16.175 16.175C19.875 12.575 19.875 6.475 16.175 2.775ZM9.475 11.475C8.375 11.475 7.475 10.575 7.475 9.475C7.475 8.375 8.375 7.475 9.475 7.475C10.575 7.475 11.475 8.375 11.475 9.475C11.475 10.575 10.575 11.475 9.475 11.475Z"
+                  opacity="1"
+                ></path>
+              </g>
+            </svg>
+          </div>
+          <p class="search__result-label">{{ result.label }}</p>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- {/* avaialble vehicles result */} -->
+
+    <!-- <div class="vehicle__result">
+        {driverResult !== null && driverResult.length === 0 ? (
+          <p>No available rides found please select different locations</p>
+        ) : (
+          driverResult !== null &&
+          driverResult.map(result => (
+            <div class="single__vehicle" key={result.id}>
+              {vehicleType(result.vehicle, result.id)}
+            </div>
+          ))
+        )}
+      </div> -->
+  </div>
+
+  <!-- {isLoading && <LoaderWithBackground />} -->
+</div>

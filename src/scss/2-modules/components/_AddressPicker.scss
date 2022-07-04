@@ -108,9 +108,10 @@
   background-image: url(https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png);
 }
 
-.search__result {
-  max-height: 240px;
+.address .search__result {
+  max-height: 235px;
   overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .search__result-item {

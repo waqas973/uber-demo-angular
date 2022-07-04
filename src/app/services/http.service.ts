@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
   additionalSignupType,
+  ApiResponsePlacesType,
   loginApiResponseType,
   loginType,
   resendEmailApiResponse,
@@ -50,5 +51,10 @@ export class HttpService {
   public newPassword(data: { password: string; token: string }) {
     let url = `${environment.API_BASE_URL}/forgot-password/confirm/`;
     return this.http.post(url, data);
+  }
+  // fetch places
+  public fetchPlaces(keyword: string): Observable<ApiResponsePlacesType> {
+    let url = `${environment.MAPBOX_BASE_URL}/geocoding/v5/mapbox.places/${keyword}.json?country=pk&language=en&autocomplete=true&fuzzyMatch=true&access_token=${environment.MAPBOX_TOKEN}`;
+    return this.http.get<ApiResponsePlacesType>(url);
   }
 }

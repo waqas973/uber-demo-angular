@@ -11,7 +11,7 @@ import { FeaturesComponent } from './components/home/features/features.component
 import { FooterComponent } from './components/footer/footer.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { SignupModalComponent } from './modals/signup-modal/signup-modal.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AutoCompleteCitiesComponent } from './components/auto-complete-cities/auto-complete-cities.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpHeaderInterceptor } from './interceptors/http-header-interceptor';
@@ -30,6 +30,8 @@ import { AuthGuardService } from './services/authGuardService';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginAuthGuardService } from './services/loginAuthGuardService';
 import { AuthUserSubnavComponent } from './components/navbar/auth-user-subnav/auth-user-subnav.component';
+import { AddressPickerComponent } from './components/address-picker/address-picker.component';
+import { AutoCompleteSearchComponent } from './components/auto-complete-search/auto-complete-search.component';
 
 @NgModule({
   declarations: [
@@ -50,12 +52,15 @@ import { AuthUserSubnavComponent } from './components/navbar/auth-user-subnav/au
     NewPasswordComponent,
     DashboardComponent,
     AuthUserSubnavComponent,
+    AddressPickerComponent,
+    AutoCompleteSearchComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
