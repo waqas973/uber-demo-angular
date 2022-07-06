@@ -35,12 +35,3 @@ const loginReducer = createReducer(
 export function reducers(state: loginStateType, action: Action) {
   return loginReducer(state, action);
 }
-// access: string;
-//   refresh: string;
-// account_type: string,
-// created: string,
-// id: number,
-// invite_code: string | null,
-// terms_and_conditions: boolean,
-// updated:string,
-// username: string,

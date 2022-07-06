@@ -57,6 +57,7 @@
                   class="icon"
                   title="My current location"
                   style="cursor: pointer; margin-top: 5px"
+                  (click)="getUserCurrentLocation()"
                 ></fa-icon>
 
                 <!-- {/* auto complete  */} -->
@@ -67,14 +68,6 @@
                   [isApiCall]="isPickApiCall"
                   (userSelectedPlace)="userSelectedPlace($event)"
                 ></app-auto-complete-search>
-                <!-- <AutoCompleteSearch
-                      topstyle="100%"
-                      cityKeyword={pickupKeyword}
-                      setSelectedLocation={setSelectedPickupLocation}
-                      setSelectedPickupLocationCoordinates={setSelectedPickupLocationCoordinates}
-                      isApiCall={isPickApiCall}
-                      setIsApiCall={setIsPickApiCall}
-                    /> -->
               </div>
               <div class="form__control--wrapper mb-2 position-relative">
                 <input
@@ -93,20 +86,16 @@
                   [isApiCall]="isDestinationApiCall"
                   (userSelectedPlace)="userSelectedPlace($event)"
                 ></app-auto-complete-search>
-
-                <!-- <AutoCompleteSearch
-                      topstyle="100%"
-                      cityKeyword={destinationKeyword}
-                      setSelectedLocation={setSelectedDestinationLocation}
-                      setSelectedDestinationLocationCoordinates={setSelectedDestinationLocationCoordinates}
-                      isApiCall={isDestinationApiCall}
-                      setIsApiCall={setIsDestinationApiCall}
-                    /> -->
               </div>
+              <!-- show error message if user not found or api not working  -->
+              <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+                {{ errorMessage }}
+              </div>
+              <!-- submit button  -->
               <button
                 type="button"
                 class="btnn btnn__request"
-                onClick="{requestRideHander}"
+                (click)="requestRideHander()"
               >
                 request now
               </button>
@@ -116,4 +105,7 @@
       </div>
     </div>
   </div>
+  <ng-container *ngIf="isLoading">
+    <app-loader></app-loader>
+  </ng-container>
 </header>

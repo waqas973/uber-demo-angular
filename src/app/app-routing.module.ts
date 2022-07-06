@@ -7,6 +7,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { reducers } from './state/reducer/loginReducer';
 import * as actionModeReducer from './state/reducer/actionModeReducer';
+import * as selectedLocationsReducer from './state/reducer/userSelectedLocationsReducer';
 import { ResendEmailComponent } from './components/resend-email/resend-email.component';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { AuthGuardService } from './services/authGuardService';
@@ -57,6 +58,10 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     StoreModule.forFeature('login', reducers),
     StoreModule.forFeature('actionMode', actionModeReducer.reducers),
+    StoreModule.forFeature(
+      'selectedLocations',
+      selectedLocationsReducer.reducers
+    ),
   ],
   exports: [RouterModule],
 })

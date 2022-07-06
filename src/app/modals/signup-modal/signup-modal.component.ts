@@ -141,10 +141,12 @@ export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
       this.city?.setValidators(Validators.required);
       this.vehicleRegBook?.setValidators(Validators.required);
       this.drivingLicence?.setValidators(Validators.required);
+      this.vehicleType?.setValidators(Validators.required);
     } else {
       this.city?.clearValidators();
       this.vehicleRegBook?.clearValidators();
       this.drivingLicence?.clearValidators();
+      this.vehicleType?.setValidators(Validators.required);
     }
   }
 
@@ -153,6 +155,7 @@ export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
     this.city?.clearValidators();
     this.vehicleRegBook?.clearValidators();
     this.drivingLicence?.clearValidators();
+    this.vehicleType?.setValidators(Validators.required);
     this.signupForm.reset();
     this.closeModalEvent.emit(false);
   }
@@ -243,8 +246,14 @@ export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
         !this.driving_licence_front_side_error
       ) {
         let account_type = 'drive_and_deliver';
-        let { first_name, last_name, email, phone_number, password } =
-          this.signupForm.value;
+        let {
+          first_name,
+          last_name,
+          email,
+          phone_number,
+          password,
+          vehicle_type,
+        } = this.signupForm.value;
         const postingData = {
           first_name,
           last_name,
@@ -253,6 +262,7 @@ export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
           password,
           account_type,
           city: this.selectedLocation,
+          vehicle: vehicle_type,
         };
         this.submitFormData(postingData);
       }
@@ -331,6 +341,7 @@ export class SignupModalComponent implements OnInit, OnChanges, OnDestroy {
     this.city?.clearValidators();
     this.vehicleRegBook?.clearValidators();
     this.drivingLicence?.clearValidators();
+    this.vehicleType?.setValidators(Validators.required);
     this.signupForm.reset();
   }
 }

@@ -96,7 +96,7 @@ export interface newPasswordFormType extends FormGroup {
 export interface loginApiResponseType {
   access?: string;
   refresh?: string;
-  user_detail: additionalSignupType;
+  user_detail: additionalSignupType & { id: number };
 }
 
 export interface citiesType {
@@ -122,4 +122,29 @@ export type featuresType = {
 };
 export interface ApiResponsePlacesType {
   features: featuresType[];
+}
+
+export interface ApiResponseDriversResultType {
+  account_type: string;
+  city: string | null;
+  driving_licence_front_side: string | null;
+  email: string;
+  first_name: string;
+  id: number;
+  last_name: string;
+  partner_photo: string;
+  phone_number: string;
+  username: string;
+  vehicle: null | string;
+  vehicle_registration_book: string | null;
+}
+
+export interface ApiRideRequestType {
+  deriver: number;
+  destination_coordinates: `${number}, ${number}`;
+  destination_label: string;
+  pickup_coordinates: `${number}, ${number}`;
+  pickup_label: string;
+  requester?: number;
+  status: string;
 }

@@ -1,6 +1,12 @@
 import { createAction, props } from '@ngrx/store';
 import { loginApiResponseType } from 'src/app/shared/Types';
-import { actionModeType, loginType, logoutType } from './actionType';
+import { SelectedLocationsType } from '../reducer/userSelectedLocationsReducer';
+import {
+  actionModeType,
+  loginType,
+  logoutType,
+  userSelectedLocationsType,
+} from './actionType';
 
 export const loginAction = createAction(
   loginType,
@@ -12,3 +18,10 @@ export const actionMode = createAction(
   props<{ payload: string }>()
 );
 export const logoutAction = createAction(logoutType);
+
+export const userSelectedLocationsAction = createAction(
+  userSelectedLocationsType,
+  props<{
+    payload: SelectedLocationsType;
+  }>()
+);

@@ -3,10 +3,30 @@
   <div id="map" style="width: 100%; z-index: 2"></div>
   <!-- base on condition render component  -->
   <ng-container *ngIf="isUser && !currentRide">
+    <!-- address picker  -->
     <app-address-picker
       [selectedFrom]="selectedFrom"
       [selectedTo]="selectedTo"
+      [driverResult]="driverResult"
+      [selectedPointDistance]="selectedPointDistance"
+      [rideRequestData]="rideRequestData"
+      (previousLocations)="previousLocations($event)"
+      (driverResultFunc)="driverResultFunc()"
+      (rideRequestDataFunc)="rideRequestDataFunc($event)"
     ></app-address-picker>
+  </ng-container>
+  <!-- ride list  -->
+  <ng-container *ngIf="!isUser && !currentRide">
+    <app-ride-list
+      [rideRequest]="rideRequest"
+      [rideRequestData]="rideRequestData"
+      [currentRide]="currentRide"
+    ></app-ride-list>
+  </ng-container>
+
+  <!-- loading if true  -->
+  <ng-container *ngIf="isLoading">
+    <app-loader></app-loader>
   </ng-container>
 </main>
 <app-footer></app-footer>
