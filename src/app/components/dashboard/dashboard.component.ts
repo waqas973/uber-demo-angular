@@ -1,4 +1,12 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  KeyValueDiffer,
+  KeyValueDiffers,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
@@ -21,27 +29,46 @@ import { environment } from 'src/environments/environment';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent implements OnInit, OnChanges {
+export class DashboardComponent implements OnInit, OnDestroy {
   map!: L.Map;
   routeControl: any;
   authUser$!: Observable<loginStateType>;
   isUser: boolean = false;
-  currentRide: any;
+  currentRide: ApiRideRequestType | null = null;
   selectedTo!: selectedFromType | null;
   selectedFrom!: selectedFromType | null;
   isLoading: boolean = false;
   driverResult: ApiResponseDriversResultType[] | null = null;
   selectedPointDistance!: string;
-  rideRequest: any = null;
-  rideRequestData: ApiRideRequestType | null = null;
-
+  rideRequest: ApiRideRequestType[] | null = null;
+  rideRequestData: ApiRideRequestType[] | null = null;
+  loginUserId?: number;
+  user!: ApiResponseDriversResultType;
+  private flag!: boolean;
+  differ: KeyValueDiffer<string, any>;
   constructor(
     private store: Store,
     private http: HttpService,
-    private toastr: ToastrService
-  ) {}
+    private toastr: ToastrService,
+    private differs: KeyValueDiffers
+  ) {
+    this.differ = this.differs.find({}).create();
+  }
+
+  // wait for login user id
+  ngDoCheck() {
+    const change = this.differ.diff(this);
+    if (change) {
+      change.forEachChangedItem((item) => {
+        if (item.key === 'loginUserId') {
+          this.acceptedRide();
+        }
+      });
+    }
+  }
 
   ngOnInit(): void {
+    this.flag = true;
     this.initMap();
     this.initRouteControl();
     // get login user detail from ngrx store
@@ -50,6 +77,8 @@ export class DashboardComponent implements OnInit, OnChanges {
       this.isUser =
         value.IsUserLogIn === true &&
         value.userData?.user_detail?.account_type === 'rider';
+
+      this.loginUserId = value.userData?.user_detail.id;
     });
 
     this.store.pipe(select(selectedLocationsSelector)).subscribe((value) => {
@@ -66,11 +95,6 @@ export class DashboardComponent implements OnInit, OnChanges {
 
     // call recent ride request function
     this.rideRequests();
-  }
-
-  // on OnChanges
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
   }
 
   /**
@@ -182,27 +206,74 @@ export class DashboardComponent implements OnInit, OnChanges {
   }
 
   // update ride request data properties
-  rideRequestDataFunc(data: ApiRideRequestType) {
-    this.rideRequestData = data;
+  rideRequestDataFunc() {
+    this.rideRequestData = null;
+    this.rideRequest = null;
     this.rideRequests();
   }
 
   // recent ride requests
   rideRequests() {
     this.http.previousRideRequest().subscribe(
-      (result) => {
-        console.log(result);
-        // if (res.data.response.length > 0) {
-        //   setRideRequestData(res.data.response);
-        //   setRideRequest(res.data.response);
-        // } else {
-        //   setRideRequestData(null);
-        //   setRideRequest(null);
-        // }
+      (result: { response: ApiRideRequestType[] }) => {
+        if (result.response.length > 0) {
+          this.rideRequestData = result.response;
+          this.rideRequest = result.response;
+        } else {
+          this.rideRequestData = null;
+          this.rideRequest = null;
+        }
       },
       (error) => {
         this.toastr.error(error);
       }
     );
+    setTimeout(() => {
+      if (this.flag) {
+        this.rideRequests();
+      }
+    }, 5000);
+  }
+
+  //  accepted ride func
+  acceptRideDataFunc() {
+    this.rideRequestData = null;
+    this.acceptedRide();
+  }
+
+  // recent accepted ride
+  acceptedRide() {
+    if (this.loginUserId) {
+      this.http.previousAcceptedRide(this.loginUserId).subscribe(
+        (result: { response: ApiRideRequestType[] }) => {
+          if (result.response.length > 0) {
+            if (this.isUser) {
+              this.user = result.response[0]
+                .deriver as ApiResponseDriversResultType;
+            } else {
+              this.user = result.response[0]
+                .requester as ApiResponseDriversResultType;
+            }
+
+            this.currentRide = result.response[0];
+          } else {
+            this.currentRide = null;
+          }
+        },
+        (error) => {
+          this.toastr.error(error);
+        }
+      );
+      setTimeout(() => {
+        if (this.flag) {
+          this.acceptedRide();
+        }
+      }, 5000);
+    }
+  }
+
+  // destroy
+  ngOnDestroy(): void {
+    this.flag = false;
   }
 }

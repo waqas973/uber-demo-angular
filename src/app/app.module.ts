@@ -33,6 +33,7 @@ import { AuthUserSubnavComponent } from './components/navbar/auth-user-subnav/au
 import { AddressPickerComponent } from './components/address-picker/address-picker.component';
 import { AutoCompleteSearchComponent } from './components/auto-complete-search/auto-complete-search.component';
 import { RideListComponent } from './components/ride-list/ride-list.component';
+import { RideDetailComponent } from './components/ride-detail/ride-detail.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { RideListComponent } from './components/ride-list/ride-list.component';
     AddressPickerComponent,
     AutoCompleteSearchComponent,
     RideListComponent,
+    RideDetailComponent,
   ],
   imports: [
     BrowserModule,

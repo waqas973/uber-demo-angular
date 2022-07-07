@@ -11,11 +11,18 @@
         Wait for the driver to accept your ride request.
       </h3>
       <div class="px-4">
-        <button class="btnn btnn__cancel" style="margin-left: auto">
+        <button
+          class="btnn btnn__cancel"
+          style="margin-left: auto"
+          (click)="cancelRide()"
+        >
           cancel ride
         </button>
       </div>
     </div>
+    <ng-container *ngIf="isLoading">
+      <app-loader></app-loader>
+    </ng-container>
   </div>
 </ng-container>
 

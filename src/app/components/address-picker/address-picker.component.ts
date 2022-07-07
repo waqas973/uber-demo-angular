@@ -46,7 +46,7 @@ export class AddressPickerComponent implements OnInit {
   @Input() selectedTo!: selectedFromType | null;
   @Input() driverResult!: ApiResponseDriversResultType[] | null;
   @Input() selectedPointDistance!: string;
-  @Input() rideRequestData!: ApiRideRequestType | null;
+  @Input() rideRequestData!: ApiRideRequestType[] | null;
 
   @Output() previousLocations = new EventEmitter();
   @Output() driverResultFunc = new EventEmitter();
@@ -237,12 +237,38 @@ export class AddressPickerComponent implements OnInit {
       // ride request Api
       this.http.rideRequest(data).subscribe(
         (result: { response: ApiRideRequestType }) => {
-          this.rideRequestDataFunc.emit(result.response);
+          this.rideRequestDataFunc.emit();
           this.isLoading = false;
         },
         (error) => {
           this.isLoading = false;
           this.toastr.error(error);
+        }
+      );
+    }
+  }
+
+  /**
+   * cancel ride
+   *
+   */
+  cancelRide() {
+    let requestid: number | undefined;
+
+    if (this.rideRequestData?.[0]) {
+      requestid = this.rideRequestData[0].id && this.rideRequestData[0].id;
+      this.isLoading = true;
+      const data = { request_id: requestid, status: '0' };
+
+      // Api call
+      this.http.cancelRequest(data).subscribe(
+        () => {
+          this.rideRequestDataFunc.emit();
+          this.isLoading = false;
+        },
+        () => {
+          this.isLoading = false;
+          this.toastr.error('unable to cancel ride');
         }
       );
     }

@@ -34,8 +34,16 @@
             <span>To: </span>
             {{ request.destination_label ? request.destination_label : "" }}
           </p>
-          <button class="ride-list__accept-btn">Accept</button>
+          <button
+            class="ride-list__accept-btn"
+            (click)="acceptRide(request?.id)"
+          >
+            Accept
+          </button>
         </div>
+        <ng-container *ngIf="isLoading">
+          <app-loader></app-loader>
+        </ng-container>
       </div>
     </ng-container>
     <!-- else part  -->

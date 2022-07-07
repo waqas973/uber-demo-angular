@@ -140,11 +140,12 @@ export interface ApiResponseDriversResultType {
 }
 
 export interface ApiRideRequestType {
-  deriver: number;
+  deriver?: number | ApiResponseDriversResultType;
   destination_coordinates: `${number}, ${number}`;
   destination_label: string;
   pickup_coordinates: `${number}, ${number}`;
   pickup_label: string;
-  requester?: number;
+  requester?: number | ApiResponseDriversResultType;
   status: string;
+  id?: number;
 }

@@ -12,7 +12,7 @@
       [rideRequestData]="rideRequestData"
       (previousLocations)="previousLocations($event)"
       (driverResultFunc)="driverResultFunc()"
-      (rideRequestDataFunc)="rideRequestDataFunc($event)"
+      (rideRequestDataFunc)="rideRequestDataFunc()"
     ></app-address-picker>
   </ng-container>
   <!-- ride list  -->
@@ -21,7 +21,30 @@
       [rideRequest]="rideRequest"
       [rideRequestData]="rideRequestData"
       [currentRide]="currentRide"
+      (acceptRideDataFunc)="acceptRideDataFunc()"
     ></app-ride-list>
+  </ng-container>
+
+  <!-- ride detail for driver  -->
+  <ng-container *ngIf="isUser && currentRide">
+    <app-ride-detail
+      [user]="user"
+      [isDriver]="false"
+      [currentRide]="currentRide"
+      (acceptRideDataFunc)="acceptRideDataFunc()"
+    >
+    </app-ride-detail>
+  </ng-container>
+
+  <!-- ride detail for driver  -->
+  <ng-container *ngIf="!isUser && currentRide">
+    <app-ride-detail
+      [user]="user"
+      [isDriver]="true"
+      [currentRide]="currentRide"
+      (acceptRideDataFunc)="acceptRideDataFunc()"
+    >
+    </app-ride-detail>
   </ng-container>
 
   <!-- loading if true  -->

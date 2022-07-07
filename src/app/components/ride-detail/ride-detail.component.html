@@ -1,0 +1,36 @@
+<div class="ride-detail">
+  <div class="ride-detail__user-avatar">
+    <img [src]="user?.partner_photo" [alt]="user?.email" />
+  </div>
+  <p class="ride-detail__user-info">
+    {{ user?.email }} - {{ user?.phone_number }}
+  </p>
+  <div class="ride-detail__actions">
+    <p class="ride-detail__result-label">
+      <span>From: </span>
+      {{ currentRide.pickup_label ? currentRide.pickup_label : "" }}
+    </p>
+    <p class="ride-detail__result-label">
+      <span>To: </span>
+      {{ currentRide.destination_label ? currentRide.destination_label : "" }}
+    </p>
+    <button class="ride-detail__btn">
+      {{ isDriver ? "Talk to User" : "Talk to Driver" }}
+    </button>
+    <button class="ride-detail__btn" (click)="cancelRide(currentRide.id)">
+      Cancel the Ride
+    </button>
+
+    <button
+      *ngIf="isDriver"
+      class="ride-detail__btn"
+      (click)="finishRide(currentRide.id)"
+    >
+      Finish the Ride
+    </button>
+  </div>
+  <!-- loading if true  -->
+  <ng-container *ngIf="isLoading">
+    <app-loader></app-loader>
+  </ng-container>
+</div>

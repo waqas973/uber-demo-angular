@@ -93,8 +93,31 @@ export class HttpService {
   }
 
   // ride request
-  public previousRideRequest() {
+  public previousRideRequest(): Observable<{ response: ApiRideRequestType[] }> {
     let url = `${environment.API_BASE_URL}/requests/`;
+    return this.http.get<{ response: ApiRideRequestType[] }>(url);
+  }
+
+  // cancel request
+  public cancelRequest(cancel_ride_data: {
+    request_id: number | undefined;
+    status: string;
+  }) {
+    let url = `${environment.API_BASE_URL}/cancel_accept_ride/`;
+    return this.http.post(url, cancel_ride_data);
+  }
+
+  // accepted ride
+  public previousAcceptedRide(
+    id: number | undefined
+  ): Observable<{ response: ApiRideRequestType[] }> {
+    let url = `${environment.API_BASE_URL}/accepted_rides/${id}/`;
+    return this.http.get<{ response: ApiRideRequestType[] }>(url);
+  }
+
+  // finish ride
+  public finishRide(id: number) {
+    let url = `${environment.API_BASE_URL}/ride_status/${id}/`;
     return this.http.get(url);
   }
 }
