@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { HttpService } from './services/http.service';
@@ -12,7 +13,8 @@ export class AppComponent implements OnInit {
   constructor(
     private http: HttpService,
     private toastr: ToastrService,
-    private store: Store
+    private store: Store,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +31,11 @@ export class AppComponent implements OnInit {
         },
         (error) => {
           this.toastr.error(error);
+          setTimeout(() => {
+            this.toastr.clear();
+            localStorage.removeItem('uber-clone-angular-token');
+            this.router.navigateByUrl('/');
+          }, 3000);
         }
       );
     }

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpService } from 'src/app/services/http.service';
 import {
@@ -20,7 +21,11 @@ export class RideDetailComponent implements OnInit {
 
   @Output() acceptRideDataFunc = new EventEmitter();
 
-  constructor(private http: HttpService, private toastr: ToastrService) {}
+  constructor(
+    private http: HttpService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -61,5 +66,9 @@ export class RideDetailComponent implements OnInit {
         }
       );
     }
+  }
+
+  goToChat() {
+    this.router.navigateByUrl('/chat');
   }
 }

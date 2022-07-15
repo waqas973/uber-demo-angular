@@ -13,6 +13,7 @@ import { NewPasswordComponent } from './components/new-password/new-password.com
 import { AuthGuardService } from './services/authGuardService';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginAuthGuardService } from './services/loginAuthGuardService';
+import { ChatComponent } from './components/chat/chat.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [LoginAuthGuardService] },
@@ -49,6 +50,11 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'chat',
+    component: ChatComponent,
     canActivate: [AuthGuardService],
   },
 ];

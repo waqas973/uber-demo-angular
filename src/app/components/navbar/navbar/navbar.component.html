@@ -3,7 +3,10 @@
     <a class="navbar-brand" routerLink="/"> Uber </a>
 
     <ng-container *ngIf="loginUserdata.IsUserLogIn">
-      <app-auth-user-subnav [profile_pic]="profile_pic"></app-auth-user-subnav>
+      <app-auth-user-subnav
+        [profile_pic]="profile_pic"
+        [unreadCount]="unreadCount"
+      ></app-auth-user-subnav>
     </ng-container>
     <!-- <LoginUserSetting profile_pic={loginUser?.userData?.user_detail?.partner_photo} unreadCount={unreadCount} /> -->
     <ng-container *ngIf="loginUserdata.IsUserLogIn === false">

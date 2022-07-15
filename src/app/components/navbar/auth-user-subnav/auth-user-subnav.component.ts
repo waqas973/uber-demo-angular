@@ -3,10 +3,11 @@ import { Router } from '@angular/router';
 import {
   faChevronDown,
   IconDefinition,
+  faComment,
 } from '@fortawesome/free-solid-svg-icons';
+
 import { Store } from '@ngrx/store';
 import { logoutAction } from 'src/app/state/actions/actions';
-import { loginStateType } from 'src/app/state/reducer/loginReducer';
 import jsonData from '../../../shared/data.json';
 
 interface authUserDropdownType {
@@ -21,9 +22,12 @@ interface authUserDropdownType {
 })
 export class AuthUserSubnavComponent implements OnInit {
   faChevronDown: IconDefinition = faChevronDown;
+  faComment: IconDefinition = faComment;
   authUserDropdown: authUserDropdownType[] = jsonData.authUserDropdown;
 
   @Input() profile_pic?: string;
+  @Input() unreadCount!: number;
+
   constructor(private _router: Router, private store: Store) {}
 
   ngOnInit(): void {}
@@ -32,5 +36,9 @@ export class AuthUserSubnavComponent implements OnInit {
     localStorage.clear();
     this.store.dispatch(logoutAction());
     this._router.navigateByUrl('/');
+  }
+
+  goToChat() {
+    this._router.navigateByUrl('/chat');
   }
 }

@@ -14,7 +14,7 @@
       <span>To: </span>
       {{ currentRide.destination_label ? currentRide.destination_label : "" }}
     </p>
-    <button class="ride-detail__btn">
+    <button class="ride-detail__btn" (click)="goToChat()">
       {{ isDriver ? "Talk to User" : "Talk to Driver" }}
     </button>
     <button class="ride-detail__btn" (click)="cancelRide(currentRide.id)">

@@ -8,6 +8,7 @@ export const environment = {
   MAPBOX_BASE_URL: 'https://api.mapbox.com',
   MAPBOX_TOKEN:
     'pk.eyJ1Ijoid2FxYXNyYXNoZWVkNjY2IiwiYSI6ImNsMzQyendnNDAwMzEzZHBzZjRvbnd5ZGcifQ.afzSkgMMzbXHT7KdIbv9Wg',
+  APP_ID: 't4SGo1EL',
 };
 
 /*

@@ -149,3 +149,10 @@ export interface ApiRideRequestType {
   status: string;
   id?: number;
 }
+
+export interface TalkUserInterface {
+  id: number;
+  username: string;
+  photoUrl?: string;
+  role: string;
+}

@@ -1,0 +1,15 @@
+<div
+  style="
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  "
+>
+  <div #talkjsContainer style="height: 80%; width: 100%">Loading...</div>
+  <!-- loading if true  -->
+  <ng-container *ngIf="isLoading">
+    <app-loader></app-loader>
+  </ng-container>
+</div>
