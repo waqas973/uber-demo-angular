@@ -35,6 +35,7 @@ import { AutoCompleteSearchComponent } from './components/auto-complete-search/a
 import { RideListComponent } from './components/ride-list/ride-list.component';
 import { RideDetailComponent } from './components/ride-detail/ride-detail.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,12 @@ import { ChatComponent } from './components/chat/chat.component';
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
     }),
   ],
   providers: [
