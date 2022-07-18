@@ -95,6 +95,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     // call recent ride request function
     this.rideRequests();
+    this.acceptedRide();
   }
 
   /**

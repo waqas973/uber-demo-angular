@@ -12,12 +12,14 @@ import {
   TalkUserInterface,
 } from 'src/app/shared/Types';
 import { loginSelector } from 'src/app/state/selectors';
+import { faArrowLeft, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
 })
 export class ChatComponent implements OnInit {
+  faArrowLeft: IconDefinition = faArrowLeft;
   loginUserId?: number;
   user_detail?: additionalSignupType | null;
   isLoading: boolean = false;

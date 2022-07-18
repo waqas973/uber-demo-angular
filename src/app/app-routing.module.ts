@@ -14,6 +14,7 @@ import { AuthGuardService } from './services/authGuardService';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginAuthGuardService } from './services/loginAuthGuardService';
 import { ChatComponent } from './components/chat/chat.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [LoginAuthGuardService] },
@@ -56,6 +57,11 @@ const routes: Routes = [
     path: 'chat',
     component: ChatComponent,
     canActivate: [AuthGuardService],
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    component: NotFoundComponent,
   },
 ];
 

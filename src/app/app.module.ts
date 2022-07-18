@@ -36,6 +36,7 @@ import { RideListComponent } from './components/ride-list/ride-list.component';
 import { RideDetailComponent } from './components/ride-detail/ride-detail.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     RideListComponent,
     RideDetailComponent,
     ChatComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
